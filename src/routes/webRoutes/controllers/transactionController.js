@@ -25,6 +25,9 @@ const create = async (req, res) => {
     ],
     raw: true
   })
+  if (b.length === 0) {
+    res.status(400).json({ message: "Ref key not found" });
+  }
   let k = b[0]['DepositPlans.portfolio']
   for (var key of Object.keys(k)) {
     m = currency(k[key].value).add(currency(m))

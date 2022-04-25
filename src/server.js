@@ -1,7 +1,7 @@
 require('dotenv').config();
 require('./middleware/passport');
-const rateLimiter = require('./middleware/rate-limiter');
 const db = require('./db/models/index.js');
+var path = require('path')
 
 // global variable
 global._ = global._ || require('lodash');
@@ -29,7 +29,6 @@ app.use(
   })
 );
 app.use(helmet());
-app.use(rateLimiter);
 app.use(compression());
 app.use(
   session({
@@ -53,6 +52,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/webRoutes/routes.js')(app);
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname, '/dist/index.html');
+});
 
 // DB
 db.sequelize

@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
             value: 0
           }
           let monthlyPlan = { ...currentDepositPlan[1].portfolio }
-          oneTimePlan[portfolio.id] = {
+          monthlyPlan[portfolio.id] = {
             id : portfolio.portfolio_id,
             value: 0
           }
@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
             {
               where: {
                 user_id: portfolio.user_id,
-                isMonthly: 0
+                isMonthly: false
               },
             }
           );
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
             {
               where: {
                 user_id: portfolio.user_id,
-                isMonthly: 1
+                isMonthly: true
               },
             }
           );

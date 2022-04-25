@@ -7,7 +7,7 @@ const depositPlan = require('./depositPlan');
 const passport = require('passport');
 
 module.exports = (app) => {
-  app.use('/', auth);
+  app.use('/api/v1/', auth);
   app.use('/user', passport.authenticate('jwt', { session: true }), user);
   app.use('/api/v1/portfolio', passport.authenticate('jwt', { session: true }), portfolio);
   app.use('/api/v1/uportfolio', passport.authenticate('jwt', { session: true }), userPortfolio);

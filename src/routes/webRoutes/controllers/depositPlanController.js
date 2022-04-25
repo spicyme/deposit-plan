@@ -29,7 +29,7 @@ const create = async (req, res) => {
 const update = (req, res) => {
   db.DepositPlan
     .update(req.body, {
-      where: { id: req.params.productId },
+      where: { id: req.params.dpId },
     })
     .then((rowUpdated) => {
       if (rowUpdated[0] === 1) {

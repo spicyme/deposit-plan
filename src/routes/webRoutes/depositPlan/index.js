@@ -9,4 +9,6 @@ DepositPlanRouter.get('/', depositPlanController.index);
 
 DepositPlanRouter.post('/', depositPlanController.create);
 
+DepositPlanRouter.put('/:dpId', depositPlanController.update);
+
 module.exports = DepositPlanRouter;
