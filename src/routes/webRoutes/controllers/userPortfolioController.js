@@ -5,8 +5,8 @@ const index = (req, res) => {
     .findAll({
       where: { user_id: req.user.id },
     })
-    .then((product) => {
-      res.status(200).json({ product });
+    .then((userPortfolios) => {
+      res.status(200).json({ userPortfolios });
     })
     .catch((err) => {
       logger.error(err);
@@ -17,11 +17,12 @@ const index = (req, res) => {
 const create = async (req, res) => {
   db.User_portfolio
     .create({ user_id: req.user.id, portfolio_id: req.body.portfolio_id, value: 0, name: req.body.name })
-    .then((product) => {
-      res.status(200).json({ product });
+    .then((userPortfolios) => {
+      res.status(200).json({ userPortfolios });
     })
     .catch((err) => {
       logger.error(err);
+      console.log(err)
       res.status(500).json(err);
     });
 };
@@ -29,7 +30,7 @@ const create = async (req, res) => {
 const update = (req, res) => {
   db.User_portfolio
     .update(req.body, {
-      where: { id: req.params.productId },
+      where: { id: req.params.portfolioId },
     })
     .then((rowUpdated) => {
       if (rowUpdated[0] === 1) {

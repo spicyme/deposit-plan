@@ -9,6 +9,6 @@ UserPortfolioRouter.get('/', userPortfolioController.index);
 
 UserPortfolioRouter.post('/', userPortfolioController.create);
 
-UserPortfolioRouter.put('/:productId', userPortfolioController.update);
+UserPortfolioRouter.put('/:portfolioId', userPortfolioController.update);
 
 module.exports = UserPortfolioRouter;

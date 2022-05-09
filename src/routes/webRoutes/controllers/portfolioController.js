@@ -3,8 +3,8 @@ const db = require('../../../db/models');
 const index = (req, res) => {
   db.Portfolio
     .findAll({})
-    .then((product) => {
-      res.status(200).json({ product });
+    .then((portfolios) => {
+      res.status(200).json({ portfolios });
     })
     .catch((err) => {
       logger.error(err);
@@ -13,12 +13,12 @@ const index = (req, res) => {
 };
 
 const create = async (req) => {
-  const product = await db.Portfolio.findOrCreate({
+  const portfolios = await db.Portfolio.findOrCreate({
     where: { name: req.name },
     defaults: req,
     raw: true,
   });
-  return product;
+  return portfolios;
 };
 
 const update = (req, res) => {

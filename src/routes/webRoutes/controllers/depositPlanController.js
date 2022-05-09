@@ -5,11 +5,12 @@ const index = (req, res) => {
     .findAll({
       where: {user_id: req.user.id}
     })
-    .then((product) => {
-      res.status(200).json({ product });
+    .then((depositPlans) => {
+      return res.status(200).json({ depositPlans });
     })
     .catch((err) => {
       logger.error(err);
+      console.log(err)
       res.status(500).json(err);
     });
 };
@@ -17,8 +18,8 @@ const index = (req, res) => {
 const create = async (req, res) => {
   db.DepositPlan
     .create({ ...req.body, user_id: req.user.id })
-    .then((product) => {
-      res.status(200).json({ product });
+    .then((depositPlans) => {
+      res.status(200).json({ depositPlans });
     })
     .catch((err) => {
       logger.error(err);
