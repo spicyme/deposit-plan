@@ -52,8 +52,7 @@ AuthRouter.post('/signup', function (req, res, next) {
           .createUser({
             name,
             email,
-            password: hash,
-            ref: "1223sdsdsd23"
+            password: hash
           })
           .then((userData) => {
             if (!userData[1]) {

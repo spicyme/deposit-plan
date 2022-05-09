@@ -6,8 +6,15 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "start-dev": "nodemon server.js",
-    "test": "jest"
+    "start-dev": "nodemon --ignore ./logs server.js",
+    "test": "cross-env NODE_ENV=test jest --runInBand",
+    "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:migrate"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -15,6 +22,7 @@
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "currency.js": "^2.0.4",
+    "dinero.js": "^1.9.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
@@ -33,6 +41,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^6.14.0",
     "eslint-config-standard": "^15.0.0",
@@ -44,6 +53,7 @@
     "jest": "^26.6.0",
     "nodemon": "^2.0.6",
     "prettier": "^2.1.2",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "supertest": "^6.2.3"
   }
 }

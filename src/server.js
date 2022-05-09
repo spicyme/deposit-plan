@@ -58,16 +58,20 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname, '/dist/index.html');
 });
 
-// DB
-db.sequelize
-  .authenticate()
-  .then(() => {
-    logger.info('CONNECTED TO DB!');
-    app.listen(PORT, HOST);
-    logger.info(`Running on http://${process.env.HOST}:${process.env.PORT}`);
-  })
-  .catch((err) => {
-    logger.error(err);
-    logger.info('Restarting ...');
-    return process.exit(205); // exit and restart
-  });
+if (process.env.NODE_ENV!=='test') {
+  // DB
+  db.sequelize
+    .authenticate()
+    .then(() => {
+      logger.info('CONNECTED TO DB!');
+      app.listen(PORT, HOST);
+      logger.info(`Running on http://${process.env.HOST}:${process.env.PORT}`);
+    })
+    .catch((err) => {
+      logger.error(err);
+      logger.info('Restarting ...');
+      return process.exit(205); // exit and restart
+    });
+}
+
+module.exports = app
